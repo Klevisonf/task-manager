@@ -1,0 +1,4 @@
+{
+  "*.js": [ "prettier --write --fix --max-warnings 0"],
+   "*.jsx": [ "prettier --write --fix --max-warnings 0"]
+}
