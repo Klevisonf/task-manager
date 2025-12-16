@@ -1,0 +1,23 @@
+const Sidebar = () => {
+  return (
+    <div className="mt-2 h-screen w-64 bg-white">
+      <div className="space-y-4 px-8 py-6">
+        <h1 className="text-xl font-semibold text-[#00ADB5]">Task Manager</h1>
+        <p>
+          Um simples{" "}
+          <span className="text-[#00ADB5]">organizador de tarefas</span>
+        </p>
+      </div>
+      <div className="flex flex-col">
+        <a href="" className="text-[#35383E]">
+          Inicio
+        </a>
+        <a href="" className="text-[#35383E]">
+          Minhas Tarefas
+        </a>
+      </div>
+    </div>
+  )
+}
+
+export default Sidebar
