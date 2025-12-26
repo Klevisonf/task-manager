@@ -1,7 +1,4 @@
-import CheckIcon from "../assets/icons/check.svg?react"
-import Loadericon from "../assets/icons/loading.svg?react"
-import DetailsIcon from "../assets/icons/details.svg?react"
-import TrashIcon from "../assets/icons/trash.svg?react"
+import { CheckIcon, DetailsIcon, Loadericon, TrashIcon } from "../assets/icons"
 import Button from "./Button"
 const TaskItem = ({ task, handleCheckboxClick, handleDeleteClick }) => {
   const getStatusClasses = () => {

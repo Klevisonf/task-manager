@@ -1,6 +1,6 @@
-import SidebarButton from "./SidebarButton"
-import HomeIcon from "../assets/icons/vector.svg?react"
 import ListCheck from "../assets/icons/list-check.svg?react"
+import HomeIcon from "../assets/icons/vector.svg?react"
+import SidebarButton from "./SidebarButton"
 const Sidebar = () => {
   return (
     <div className="mt-2 h-screen w-64 bg-white">

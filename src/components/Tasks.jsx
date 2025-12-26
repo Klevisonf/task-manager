@@ -1,14 +1,17 @@
-import Button from "./Button"
-import AddIcon from "../assets/icons/add.svg?react"
-import TrashIcon from "../assets/icons/trash.svg?react"
-import SunIcon from "../assets/icons/sun.svg?react"
-import CloudSunIcon from "../assets/icons/cloudsun.svg?react"
-import MoonIcon from "../assets/icons/lua.svg?react"
-import TaskSeparator from "./TaskSeparator"
-import TASK from "../assets/constantes/tasks"
 import { useState } from "react"
-import TaskItem from "./TaskItem"
 import { toast } from "sonner"
+
+import TASK from "../assets/constantes/tasks"
+import {
+  AddIcon,
+  CloudSunIcon,
+  MoonIcon,
+  SunIcon,
+  TrashIcon,
+} from "../assets/icons"
+import Button from "./Button"
+import TaskItem from "./TaskItem"
+import TaskSeparator from "./TaskSeparator"
 
 const Tasks = () => {
   const [tasks, setTasks] = useState(TASK)
