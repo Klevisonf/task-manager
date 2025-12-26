@@ -1,4 +1,4 @@
-const Button = ({ children, variant = "primary" }) => {
+const Button = ({ children, variant = "primary", onClick }) => {
   const getVariantClasses = () => {
     if (variant === "primary") {
       return "bg-[#00ADB5] text-white"
@@ -12,6 +12,7 @@ const Button = ({ children, variant = "primary" }) => {
     <div>
       <button
         className={`item-center flex gap-2 rounded-lg bg-[#00ADB5] px-3 py-1 text-xs ${getVariantClasses()}`}
+        onClick={onClick}
       >
         {children}
       </button>
