@@ -17,6 +17,7 @@ import TaskSeparator from "./TaskSeparator"
 const Tasks = () => {
   const [addTaskDialogOpen, setAddTaskDialogOpen] = useState(false)
   const [tasks, setTasks] = useState(TASK)
+
   const morningTasks = tasks.filter((task) => task.time === "morning")
   const afternoonTasks = tasks.filter((task) => task.time === "afternoon")
   const eveningTasks = tasks.filter((task) => task.time === "evening")
@@ -52,7 +53,10 @@ const Tasks = () => {
     })
     setTasks(newTasks)
   }
-
+  const handleAddTaskSubmit = (task) => {
+    setTasks([...tasks, task])
+    toast.success("Tarefa adicionada com sucesso!")
+  }
   return (
     <div className="w-full space-y-6 px-8 py-16">
       <div className="flex w-full justify-between">
@@ -76,6 +80,7 @@ const Tasks = () => {
           <AddTaskDialog
             isOpen={addTaskDialogOpen}
             handleClose={handleDialogClose}
+            handleSubmit={handleAddTaskSubmit}
           />
         </div>
       </div>
