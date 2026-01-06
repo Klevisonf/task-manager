@@ -1,52 +1,61 @@
 import "./AddTaskDialog.css"
 
-import { useRef } from "react"
-import { useState } from "react"
+import { useRef, useState } from "react"
 import { createPortal } from "react-dom"
 import { CSSTransition } from "react-transition-group"
-import v4 from "uuid"
+import { v4 as uuidv4 } from "uuid"
+
 import Button from "./Button"
 import Input from "./Input"
-import InputLabel from "./InputLabel"
 import TimeSelect from "./TimeSelect"
 
 const AddTaskDialog = ({ isOpen, handleClose, handleSubmit }) => {
-  const [title, setTitle] = useState()
-  const [time, setTime] = useState()
-  const [description, setDescription] = useState()
-  const nodeRef = useRef()
+  const [title, setTitle] = useState("")
+  const [time, setTime] = useState("morning")
+  const [description, setDescription] = useState("")
+  const nodeRef = useRef(null)
+
+  // função interna que limpa e fecha
+  const onDialogClose = () => {
+    setTitle("")
+    setTime("morning")
+    setDescription("")
+    handleClose()
+  }
 
   const handleSaveClick = () => {
     handleSubmit({
-      id: v4(),
+      id: uuidv4(),
       title,
       time,
       description,
       status: "not_started",
     })
-    handleClose
+
+    // limpa e fecha
+    onDialogClose()
   }
 
   return (
     <CSSTransition
       nodeRef={nodeRef}
       in={isOpen}
-      timeout={500}
+      timeout={300}
       classNames="add-task-dialog"
       unmountOnExit
     >
-      <div>
+      <div ref={nodeRef}>
         {createPortal(
           <div className="fixed top-0 bottom-0 left-0 flex h-screen w-screen items-center justify-center backdrop-blur-sm">
-            {/* Dialog content */}
             <div className="rounded-xl bg-white p-5 text-center">
               <h2 className="text-xl font-semibold text-[#35383E]">
-                {" "}
                 Nova Tarefa
               </h2>
+
               <p className="my-1 text-sm text-[#9A9C9F]">
-                insira as informações abaixo{" "}
+                Insira as informações abaixo
               </p>
+
               <div className="flex w-[336px] flex-col space-y-4">
                 <Input
                   id="title"
@@ -68,15 +77,17 @@ const AddTaskDialog = ({ isOpen, handleClose, handleSubmit }) => {
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
                 />
+
                 <div className="flex gap-3">
                   <Button
                     size="large"
                     className="w-full text-center"
                     variant="secundary"
-                    onClick={handleClose}
+                    onClick={onDialogClose}
                   >
                     Cancelar
                   </Button>
+
                   <Button
                     size="large"
                     className="w-full text-center"
