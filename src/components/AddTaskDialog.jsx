@@ -10,25 +10,26 @@ import Input from "./Input"
 import TimeSelect from "./TimeSelect"
 
 const AddTaskDialog = ({ isOpen, handleClose, handleSubmit }) => {
-  const [title, setTitle] = useState("")
-  const [time, setTime] = useState("morning")
-  const [description, setDescription] = useState("")
   const [errors, setErrors] = useState([])
-  const nodeRef = useRef(null)
 
+  const nodeRef = useRef()
+  const titleRef = useRef()
+  const descriptionRef = useRef()
+  const timeRef = useRef()
   // função interna que limpa e fecha
 
   const onDialogClose = () => {
-    setTitle("")
-    setTime("morning")
     setErrors([])
-    setDescription("")
 
     handleClose()
   }
 
   const handleSaveClick = () => {
     const newErrors = []
+
+    const title = titleRef.current.value
+    const description = descriptionRef.current.value
+    const time = timeRef.current.value
 
     if (!title.trim()) {
       newErrors.push({
@@ -96,23 +97,17 @@ const AddTaskDialog = ({ isOpen, handleClose, handleSubmit }) => {
                   id="title"
                   label="Título"
                   placeholder="Título da tarefa"
-                  value={title}
-                  onChange={(e) => setTitle(e.target.value)}
                   errorMessage={titleError?.message}
+                  ref={titleRef}
                 />
 
-                <TimeSelect
-                  value={time}
-                  onChange={(e) => setTime(e.target.value)}
-                  errorMessage={timeError?.message}
-                />
+                <TimeSelect errorMessage={timeError?.message} ref={timeRef} />
 
                 <Input
                   id="description"
                   label="Descrição"
                   placeholder="Descrever as tarefas"
-                  value={description}
-                  onChange={(e) => setDescription(e.target.value)}
+                  ref={descriptionRef}
                   errorMessage={descriptionError?.message}
                 />
 
