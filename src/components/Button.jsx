@@ -7,13 +7,13 @@ const Button = ({
 }) => {
   const getVariantClasses = () => {
     if (variant === "primary") {
-      return "bg-[#00ADB5] text-white"
+      return "bg-primary text-white"
     }
     if (variant === "ghost") {
-      return "bg-transparent text-[#818181]"
+      return "bg-transparent text-dark-gray"
     }
     if (variant === "secundary") {
-      return "bg-[#EEEEEE] text-[#35383E] "
+      return "bg-light-gray text-text-dark-blue "
     }
   }
 
@@ -28,7 +28,7 @@ const Button = ({
 
   return (
     <button
-      className={`item-center flex justify-center gap-2 rounded-lg bg-[#00ADB5] px-3 ${getSizeClasses()} ${getVariantClasses()} ${className}`}
+      className={`item-center flex justify-center gap-2 rounded-lg px-3 ${getSizeClasses()} ${getVariantClasses()} ${className}`}
       {...rest}
     >
       {children}

@@ -1,5 +1,6 @@
 @import "tailwindcss";
 
+
 @layer base {
   @font-face {
     font-family: "Poppins";
@@ -130,4 +131,18 @@
   body{
     @apply bg-[#f8f8f8]
   }
+  @theme {
+  --font-display: "Satoshi", "sans-serif";
+  --breakpoint-3xl: 120rem;
+    --color-dark-blue: #35383E;
+  --color-primary: #00ADB5;
+  --color-dark-gray: #818181;
+  --color-text-gray: #9A9C9F;
+  --color-light-gray: #EEEEEE;
+  --color-white: #FFFFFF;
+  --color-background: #F8F8F8;
+  --color-process: #FFAA84;
+  --color-danger: #EF4444;
+  /* ... */
+}
 }

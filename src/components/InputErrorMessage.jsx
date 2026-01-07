@@ -1,5 +1,5 @@
 const InputErrorMessage = ({ children }) => {
-  return <p className="mt-2 text-left text-sm text-red-500">{children}</p>
+  return <p className="text-danger mt-2 text-left text-sm">{children}</p>
 }
 
 export default InputErrorMessage
