@@ -1,5 +1,6 @@
 import { forwardRef } from "react"
 
+import InputErrorMessage from "./InputErrorMessage"
 import InputLabel from "./InputLabel"
 
 const TimeSelect = forwardRef((props, ref) => {
@@ -17,9 +18,7 @@ const TimeSelect = forwardRef((props, ref) => {
         <option value="evening">Noite</option>
       </select>
       {props.errorMessage && (
-        <p className="mt-2 text-left text-sm text-red-500">
-          {props.errorMessage}
-        </p>
+        <InputErrorMessage>{props.errorMessage}</InputErrorMessage>
       )}
     </div>
   )
