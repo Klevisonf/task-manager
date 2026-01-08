@@ -1,36 +1,33 @@
+import { tv } from "tailwind-variants"
+
 const Button = ({
   children,
-  variant = "primary",
+  color = "primary",
   size = "small",
   className,
   ...rest
 }) => {
-  const getVariantClasses = () => {
-    if (variant === "primary") {
-      return "bg-primary text-white"
-    }
-    if (variant === "ghost") {
-      return "bg-transparent text-dark-gray"
-    }
-    if (variant === "secundary") {
-      return "bg-light-gray text-text-dark-blue "
-    }
-  }
-
-  const getSizeClasses = () => {
-    if (size === "small") {
-      return "  py-1 text-xs"
-    }
-    if (size === "large") {
-      return "  py-2 text-sm"
-    }
-  }
+  const button = tv({
+    base: "inter flex items-center justify-center gap-2 rounded-lg px-3 font-semibold transition hover:opacity-75",
+    variants: {
+      color: {
+        primary: "bg-primary text-white",
+        ghost: "text-dark-gray bg-transparent",
+        secundary: "bg-light-gray text-text-dark-blue",
+      },
+      size: {
+        small: "py-1 text-xs",
+        large: "py-2 text-sm",
+      },
+    },
+    defaultVariants: {
+      color: "primary",
+      size: "small",
+    },
+  })
 
   return (
-    <button
-      className={`item-center flex justify-center gap-2 rounded-lg px-3 ${getSizeClasses()} ${getVariantClasses()} ${className}`}
-      {...rest}
-    >
+    <button className={button({ color, size, className })} {...rest}>
       {children}
     </button>
   )
