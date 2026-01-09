@@ -15,52 +15,10 @@
       "status": "done"
     },
     {
-      "id": "3",
-      "title": "Compras",
-      "description": "Comprar uma rede pela manha",
-      "time": "afternoon",
-      "status": "in_progress"
-    },
-    {
-      "id": "4",
-      "title": "Correr",
-      "description": "Cardio pela tarde, pos sol quente",
-      "time": "afternoon",
-      "status": "in_progress"
-    },
-    {
-      "id": "5",
+      "id": "922a60d5-09f9-4359-91ad-33795768c7ec",
       "title": "Reuniao",
-      "description": "Reuniao para trabalho",
-      "time": "evening",
-      "status": "not_started"
-    },
-    {
-      "id": "6",
-      "title": "Meditar",
-      "description": "Meditar antes de dormir",
-      "time": "evening",
-      "status": "not_started"
-    },
-    {
-      "id": "595d6adf-42fd-467e-b960-1a03d83f2389",
-      "title": "test",
       "time": "morning",
       "description": "test",
-      "status": "not_started"
-    },
-    {
-      "id": "d1d353fb-e443-48f2-a998-f1cae51d3023",
-      "title": "Correr Cedo",
-      "time": "evening",
-      "description": "amanha ",
-      "status": "not_started"
-    },
-    {
-      "id": "609b2782-d7b8-4c83-aec5-c72c5bb98e03",
-      "title": "task",
-      "time": "morning",
-      "description": "task",
       "status": "not_started"
     }
   ]
