@@ -1,3 +1,5 @@
+import PropTypes from "prop-types"
+
 import { CheckIcon, DetailsIcon, Loadericon, TrashIcon } from "../assets/icons"
 import Button from "./Button"
 const TaskItem = ({ task, handleCheckboxClick, handleDeleteClick }) => {

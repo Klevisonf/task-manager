@@ -1,3 +1,5 @@
+import PropTypes from "prop-types"
+
 import ListCheck from "../assets/icons/list-check.svg?react"
 import HomeIcon from "../assets/icons/vector.svg?react"
 import SidebarButton from "./SidebarButton"

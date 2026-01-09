@@ -1,5 +1,6 @@
 import "./AddTaskDialog.css"
 
+import PropTypes from "prop-types"
 import { useRef, useState } from "react"
 import { createPortal } from "react-dom"
 import { CSSTransition } from "react-transition-group"

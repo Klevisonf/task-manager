@@ -1,3 +1,5 @@
+import PropTypes from "prop-types"
+
 const InputErrorMessage = ({ children }) => {
   return <p className="text-danger mt-2 text-left text-sm">{children}</p>
 }

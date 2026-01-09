@@ -1,7 +1,6 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { toast } from "sonner"
 
-import TASK from "../assets/constantes/tasks"
 import {
   AddIcon,
   CloudSunIcon,
@@ -16,7 +15,21 @@ import TaskSeparator from "./TaskSeparator"
 
 const Tasks = () => {
   const [addTaskDialogOpen, setAddTaskDialogOpen] = useState(false)
-  const [tasks, setTasks] = useState(TASK)
+  const [tasks, setTasks] = useState([])
+
+  useEffect(() => {
+    const fetchTasks = async () => {
+      // pega os dados da API
+      const response = await fetch("http://localhost:3000/tasks", {
+        method: "GET",
+      })
+      const tasks = await response.json()
+      setTasks(tasks)
+
+      // Apos pegar os dados, converte para JSON
+    }
+    fetchTasks()
+  }, [])
 
   const morningTasks = tasks.filter((task) => task.time === "morning")
   const afternoonTasks = tasks.filter((task) => task.time === "afternoon")
