@@ -1,25 +1,3 @@
 {
-  "tasks": [
-    {
-      "id": "1",
-      "title": "Descansar",
-      "description": "Descansar na rede pela manha",
-      "time": "morning",
-      "status": "done"
-    },
-    {
-      "id": "2",
-      "title": "Treinar",
-      "description": "Treinar pela manha ",
-      "time": "morning",
-      "status": "done"
-    },
-    {
-      "id": "922a60d5-09f9-4359-91ad-33795768c7ec",
-      "title": "Reuniao",
-      "time": "morning",
-      "description": "test",
-      "status": "not_started"
-    }
-  ]
+  "tasks": []
 }
