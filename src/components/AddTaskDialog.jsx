@@ -4,14 +4,17 @@ import PropTypes from "prop-types"
 import { useRef, useState } from "react"
 import { createPortal } from "react-dom"
 import { CSSTransition } from "react-transition-group"
-import { v4 as uuidv4 } from "uuid"
+import { toast } from "sonner"
+import { v4 } from "uuid"
 
+import { Loadericon } from "../assets/icons"
 import Button from "./Button"
 import Input from "./Input"
 import TimeSelect from "./TimeSelect"
 
-const AddTaskDialog = ({ isOpen, handleClose, handleSubmit }) => {
+const AddTaskDialog = ({ isOpen, handleClose, onSubmitSuccess }) => {
   const [errors, setErrors] = useState([])
+  const [isLoading, setIsloading] = useState(false)
 
   const nodeRef = useRef()
   const titleRef = useRef()
@@ -25,7 +28,7 @@ const AddTaskDialog = ({ isOpen, handleClose, handleSubmit }) => {
     handleClose()
   }
 
-  const handleSaveClick = () => {
+  const handleSaveClick = async () => {
     const newErrors = []
 
     const title = titleRef.current.value
@@ -56,14 +59,20 @@ const AddTaskDialog = ({ isOpen, handleClose, handleSubmit }) => {
     if (newErrors.length > 0) {
       return
     }
-    handleSubmit({
-      id: uuidv4(),
-      title,
-      time,
-      description,
-      status: "not_started",
+    const task = { id: v4(), title, time, description, status: "not_started" }
+    setIsloading(true)
+    const response = await fetch("http://localhost:3000/tasks", {
+      method: "POST",
+      body: JSON.stringify(task),
     })
-
+    if (!response.ok) {
+      setIsloading(false)
+      return toast.error(
+        "Erro ao adicionar tarefa. Por favor, tente novamente."
+      )
+    }
+    onSubmitSuccess(task)
+    setIsloading(false)
     // limpa e fecha
     onDialogClose()
   }
@@ -126,7 +135,9 @@ const AddTaskDialog = ({ isOpen, handleClose, handleSubmit }) => {
                     size="large"
                     className="w-full text-center"
                     onClick={handleSaveClick}
+                    disabled={isLoading}
                   >
+                    {isLoading && <Loadericon className="animate-spin gap-2" />}
                     Salvar
                   </Button>
                 </div>

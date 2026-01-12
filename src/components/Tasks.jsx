@@ -103,7 +103,7 @@ const Tasks = () => {
           <AddTaskDialog
             isOpen={addTaskDialogOpen}
             handleClose={handleDialogClose}
-            handleSubmit={handleAddTaskSubmit}
+            onSubmitSuccess={handleAddTaskSubmit}
           />
         </div>
       </div>
