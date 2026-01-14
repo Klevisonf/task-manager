@@ -1,9 +1,9 @@
 import { useState } from "react"
+import { Link } from "react-router-dom"
 import { toast } from "sonner"
 
 import { CheckIcon, DetailsIcon, Loadericon, TrashIcon } from "../assets/icons"
 import Button from "./Button"
-import { Link } from "react-router-dom"
 const TaskItem = ({ task, handleCheckboxClick, onDeleteSuccess }) => {
   const [deleteIsLoading, setDeleteIsLoading] = useState(false)
 

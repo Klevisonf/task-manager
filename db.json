@@ -1,38 +1,31 @@
 {
   "tasks": [
     {
-      "id": "53535272-72a9-44b7-9293-be961eb0f3f4",
-      "title": "test123",
-      "time": "morning",
-      "description": "testtt",
-      "status": "not_started"
-    },
-    {
-      "id": "7eea9273-937a-424d-8a11-f5621738892d",
-      "title": "casar",
-      "time": "evening",
-      "description": "cvasa",
-      "status": "not_started"
-    },
-    {
-      "id": "714c1c02-8018-4183-84b2-98b1ac84b571",
+      "id": "33adaba9-3f9c-4d61-a1c9-f7c06a86c994",
       "title": "test",
-      "time": "afternoon",
+      "time": "morning",
       "description": "test",
       "status": "not_started"
     },
     {
-      "id": "215ab333-1f5f-4a3c-9d93-c6b56ee5621d",
-      "title": "correr",
-      "time": "afternoon",
-      "description": "caminhada",
+      "id": "af9da05c-fcba-4a14-924b-0cc5976f9870",
+      "title": "rola",
+      "time": "morning",
+      "description": "casa",
       "status": "not_started"
     },
     {
-      "id": "215ab333-1f5f-4a3c-9d93-c6b56ee5621d",
-      "title": "correr",
+      "id": "c4f68672-8298-4d2f-a89a-5dcefbe6c6cd",
+      "title": "Ir para academia",
       "time": "afternoon",
-      "description": "caminhada",
+      "description": "Ir para academia",
+      "status": "not_started"
+    },
+    {
+      "id": "c4f68672-8298-4d2f-a89a-5dcefbe6c6cd",
+      "title": "Ir para academia",
+      "time": "afternoon",
+      "description": "Ir para academia",
       "status": "not_started"
     }
   ]
