@@ -8,20 +8,6 @@
       "status": "not_started"
     },
     {
-      "id": "af9da05c-fcba-4a14-924b-0cc5976f9870",
-      "title": "rola",
-      "time": "morning",
-      "description": "casa",
-      "status": "not_started"
-    },
-    {
-      "id": "c4f68672-8298-4d2f-a89a-5dcefbe6c6cd",
-      "title": "Ir para academia",
-      "time": "afternoon",
-      "description": "Ir para academia",
-      "status": "not_started"
-    },
-    {
       "id": "c4f68672-8298-4d2f-a89a-5dcefbe6c6cd",
       "title": "Ir para academia",
       "time": "afternoon",
