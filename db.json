@@ -1,94 +1,10 @@
 {
   "tasks": [
     {
-      "id": "b34ad95d-87f6-4f14-bacb-fab5112c85e7",
-      "title": "casar",
-      "time": "morning",
-      "description": "casar",
-      "status": "not_started"
-    },
-    {
-      "id": "b1708ebe-2d74-4495-bc07-6c47bbee7330",
-      "title": "Correr",
-      "time": "morning",
-      "description": "Correr",
-      "status": "not_started"
-    },
-    {
-      "id": "5976db22-4aa9-43d1-aac7-14315be01593",
-      "title": "Correrc",
-      "time": "morning",
-      "description": "Correrc",
-      "status": "not_started"
-    },
-    {
-      "id": "22bcddcc-9511-4592-89e2-5fde24ee1b23",
-      "title": "Correrc",
-      "time": "morning",
-      "description": "Correrc",
-      "status": "not_started"
-    },
-    {
-      "id": "f528f0df-d2e5-435b-8e07-7d9d434fd353",
-      "title": "casar",
-      "time": "morning",
-      "description": "casar",
-      "status": "not_started"
-    },
-    {
-      "id": "6ed54e1c-94aa-4912-b861-a296fdbe7b8c",
-      "title": "Correr",
-      "time": "afternoon",
-      "description": "correr",
-      "status": "not_started"
-    },
-    {
-      "id": "6ed54e1c-94aa-4912-b861-a296fdbe7b8c",
-      "title": "Correr",
-      "time": "afternoon",
-      "description": "correr",
-      "status": "not_started"
-    },
-    {
-      "id": "aa4ac797-3e76-4755-bb9c-9e286feb79b5",
-      "title": "Correr",
-      "time": "afternoon",
-      "description": "correr",
-      "status": "not_started"
-    },
-    {
-      "id": "aa4ac797-3e76-4755-bb9c-9e286feb79b5",
-      "title": "Correr",
-      "time": "afternoon",
-      "description": "correr",
-      "status": "not_started"
-    },
-    {
-      "id": "90b58b7d-0f94-4f2b-8213-0d8db999f401",
+      "id": "68ef7258-b3e5-44a6-956a-9af725dff072",
       "title": "casar",
       "time": "afternoon",
-      "description": "casar",
-      "status": "not_started"
-    },
-    {
-      "id": "d19af909-8a79-43df-bc0a-e77325bc9bba",
-      "title": "casar",
-      "time": "afternoon",
-      "description": "r",
-      "status": "not_started"
-    },
-    {
-      "id": "ff828ad5-13ae-4371-8309-ac755623eca4",
-      "title": "Titulos",
-      "time": "evening",
-      "description": "Titulos",
-      "status": "not_started"
-    },
-    {
-      "id": "ff828ad5-13ae-4371-8309-ac755623eca4",
-      "title": "Titulos",
-      "time": "evening",
-      "description": "Titulos",
+      "description": "casa",
       "status": "not_started"
     }
   ]

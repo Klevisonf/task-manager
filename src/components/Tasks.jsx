@@ -1,3 +1,4 @@
+import { useQuery, useQueryClient } from "@tanstack/react-query"
 import { useState } from "react"
 import { toast } from "sonner"
 
@@ -12,18 +13,28 @@ import AddTaskDialog from "./AddTaskDialog"
 import Button from "./Button"
 import TaskItem from "./TaskItem"
 import TaskSeparator from "./TaskSeparator"
-
 const Tasks = () => {
-  const [addTaskDialogOpen, setAddTaskDialogOpen] = useState(false)
-  const [tasks, setTasks] = useState([])
+  const queryClient = useQueryClient()
+  const { data: tasks } = useQuery({
+    queryKey: "tasks",
+    queryFn: async () => {
+      const response = await fetch(`http://localhost:3000/tasks`, {
+        method: "GET",
+      })
+      const tasks = await response.json()
+      return tasks
+    },
+  })
 
-  const morningTasks = tasks.filter((task) => task.time === "morning")
-  const afternoonTasks = tasks.filter((task) => task.time === "afternoon")
-  const eveningTasks = tasks.filter((task) => task.time === "evening")
+  const [addTaskDialogOpen, setAddTaskDialogOpen] = useState(false)
+  const morningTasks = tasks?.filter((task) => task.time === "morning")
+  const afternoonTasks = tasks?.filter((task) => task.time === "afternoon")
+  const eveningTasks = tasks?.filter((task) => task.time === "evening")
 
   const onDeleteTaskSuccess = async (taskId) => {
-    const newTasks = tasks.filter((task) => task.id !== taskId)
-    setTasks(newTasks)
+    queryClient.setQueryData("tasks", (currentTasks) => {
+      return currentTasks?.filter((task) => task.id !== taskId)
+    })
     toast.success("Tarefa deletada com sucesso!")
   }
 
@@ -32,7 +43,7 @@ const Tasks = () => {
   }
 
   const handleTaskCheckboxClick = (taskId) => {
-    const newTasks = tasks.map((task) => {
+    const newTasks = tasks?.map((task) => {
       if (task.id !== taskId) {
         return task
       }
@@ -50,22 +61,9 @@ const Tasks = () => {
       }
       return task
     })
-    setTasks(newTasks)
+    queryClient.setQueryData("tasks", newTasks)
   }
-  const handleAddTaskSubmit = async (task) => {
-    //chamar a api para adicionar a tarefa
-    const response = await fetch("http://localhost:3000/tasks", {
-      method: "POST",
-      body: JSON.stringify(task),
-    })
-    if (!response.ok) {
-      return toast.error(
-        "Erro ao adicionar tarefa. Por favor, tente novamente."
-      )
-    }
-    setTasks([...tasks, task])
-    toast.success("Tarefa adicionada com sucesso!")
-  }
+
   return (
     <div className="w-full space-y-6 px-8 py-16">
       <div className="flex w-full justify-between">
@@ -89,7 +87,6 @@ const Tasks = () => {
           <AddTaskDialog
             isOpen={addTaskDialogOpen}
             handleClose={handleDialogClose}
-            onSubmitSuccess={handleAddTaskSubmit}
           />
         </div>
       </div>
@@ -97,10 +94,10 @@ const Tasks = () => {
       <div className="rounded-lg bg-white p-6">
         <div className="space-y-3">
           <TaskSeparator title="Manha" icon={<SunIcon />} />
-          {morningTasks.length === 0 && (
+          {morningTasks?.length === 0 && (
             <p>Nenhuma tarefa cadastrada para o periodo da manha</p>
           )}
-          {morningTasks.map((task) => (
+          {morningTasks?.map((task) => (
             <TaskItem
               key={task.id}
               task={task}
@@ -112,10 +109,10 @@ const Tasks = () => {
 
         <div className="my-6 space-y-3">
           <TaskSeparator title="Tarde" icon={<CloudSunIcon />} />
-          {afternoonTasks.length === 0 && (
+          {afternoonTasks?.length === 0 && (
             <p>Nenhuma tarefa cadastrada para o periodo da tarde</p>
           )}
-          {afternoonTasks.map((task) => (
+          {afternoonTasks?.map((task) => (
             <TaskItem
               key={task.id}
               task={task}
@@ -127,10 +124,10 @@ const Tasks = () => {
 
         <div className="space-y-3">
           <TaskSeparator title="Noite" icon={<MoonIcon />} />
-          {eveningTasks.length === 0 && (
+          {eveningTasks?.length === 0 && (
             <p>Nenhuma tarefa cadastrada para o periodo da noite</p>
           )}
-          {eveningTasks.map((task) => (
+          {eveningTasks?.map((task) => (
             <TaskItem
               key={task.id}
               task={task}

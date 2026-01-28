@@ -1,5 +1,6 @@
 import "./AddTaskDialog.css"
 
+import { QueryClient, useMutation, useQueryClient } from "@tanstack/react-query"
 import { useRef } from "react"
 import { createPortal } from "react-dom"
 import { useForm } from "react-hook-form"
@@ -12,7 +13,7 @@ import Button from "./Button"
 import Input from "./Input"
 import TimeSelect from "./TimeSelect"
 
-const AddTaskDialog = ({ isOpen, handleClose, onSubmitSuccess }) => {
+const AddTaskDialog = ({ isOpen, handleClose }) => {
   const {
     register,
     handleSubmit,
@@ -26,7 +27,20 @@ const AddTaskDialog = ({ isOpen, handleClose, onSubmitSuccess }) => {
     },
   })
   const nodeRef = useRef()
-
+  const queryClient = useQueryClient()
+  const { mutate } = useMutation({
+    mutationKey: "addTask",
+    mutationFn: async (Task) => {
+      const response = await fetch("http://localhost:3000/tasks", {
+        method: "POST",
+        body: JSON.stringify(Task),
+      })
+      if (!response.ok) {
+        throw new Error("Erro ao adicionar tarefa")
+      }
+      return response.json()
+    },
+  })
   // função interna que limpa e fecha
 
   const onDialogClose = () => {
@@ -42,16 +56,22 @@ const AddTaskDialog = ({ isOpen, handleClose, onSubmitSuccess }) => {
       status: "not_started",
     }
 
-    const response = await fetch("http://localhost:3000/tasks", {
-      method: "POST",
-      body: JSON.stringify(task),
+    mutate(task, {
+      onSuccess: () => {
+        queryClient.setQueryData("tasks", (oldTasks) => {
+          return [...oldTasks, task]
+        })
+        handleClose()
+        reset({
+          title: "",
+          time: "morning",
+          description: "",
+        })
+      },
+      onError: () => {
+        toast.error("Erro ao adicionar tarefa. Por favor, tente novamente.")
+      },
     })
-    if (!response.ok) {
-      return toast.error(
-        "Erro ao adicionar tarefa. Por favor, tente novamente."
-      )
-    }
-    onSubmitSuccess(task)
 
     // limpa e fecha
     onDialogClose()
