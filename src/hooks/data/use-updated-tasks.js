@@ -1,17 +1,15 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query"
-import axios from "axios"
 import { Navigate } from "react-router-dom"
 import { toast } from "sonner"
+
+import { api } from "../../lib/axios"
 
 export const useUpdatedTasks = (taskId) => {
   const queryClient = useQueryClient()
   return useMutation({
     mutationKey: ["updateTask", taskId],
     mutationFn: async (formData) => {
-      const { data: updated } = await axios.patch(
-        `http://localhost:3000/tasks/${taskId}`,
-        formData
-      )
+      const { data: updated } = await api.patch(`/tasks/${taskId}`, formData)
       return updated
     },
     onSuccess: (updated) => {
