@@ -1,11 +1,3 @@
 {
-  "tasks": [
-    {
-      "id": "68ef7258-b3e5-44a6-956a-9af725dff072",
-      "title": "casar",
-      "time": "afternoon",
-      "description": "casa",
-      "status": "not_started"
-    }
-  ]
+  "tasks": []
 }

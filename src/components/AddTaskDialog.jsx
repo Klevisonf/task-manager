@@ -1,6 +1,6 @@
 import "./AddTaskDialog.css"
 
-import { QueryClient, useMutation, useQueryClient } from "@tanstack/react-query"
+import { useQueryClient } from "@tanstack/react-query"
 import { useRef } from "react"
 import { createPortal } from "react-dom"
 import { useForm } from "react-hook-form"
@@ -12,6 +12,7 @@ import { Loadericon } from "../assets/icons"
 import Button from "./Button"
 import Input from "./Input"
 import TimeSelect from "./TimeSelect"
+import { useAddTask } from "../hooks/data/use-add-task"
 
 const AddTaskDialog = ({ isOpen, handleClose }) => {
   const {
@@ -28,20 +29,7 @@ const AddTaskDialog = ({ isOpen, handleClose }) => {
   })
   const nodeRef = useRef()
   const queryClient = useQueryClient()
-  const { mutate } = useMutation({
-    mutationKey: "addTask",
-    mutationFn: async (Task) => {
-      const response = await fetch("http://localhost:3000/tasks", {
-        method: "POST",
-        body: JSON.stringify(Task),
-      })
-      if (!response.ok) {
-        throw new Error("Erro ao adicionar tarefa")
-      }
-      return response.json()
-    },
-  })
-  // função interna que limpa e fecha
+  const { mutate } = useAddTask()
 
   const onDialogClose = () => {
     handleClose()

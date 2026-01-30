@@ -1,16 +1,16 @@
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 import { useForm } from "react-hook-form"
 import { Link, useNavigate, useParams } from "react-router-dom"
-import { toast } from "sonner"
 
 import { ArrowLeft, ChevronRight, Loadericon, TrashIcon } from "../assets/icons"
 import Button from "../components/Button"
 import Input from "../components/Input"
 import Sidebar from "../components/Sidebar"
 import TimeSelect from "../components/TimeSelect"
+import { useDeletedTask } from "../hooks/data/use-deleted-task"
+import { useGetTask } from "../hooks/data/use-get-task"
+import { useUpdatedTasks } from "../hooks/data/use-updated-tasks"
 
 const TaskDetailsPage = () => {
-  const queryClient = useQueryClient()
   const { taskId } = useParams()
   const navigate = useNavigate()
 
@@ -22,88 +22,22 @@ const TaskDetailsPage = () => {
   } = useForm()
 
   // Buscar tarefa
-  const { data: task, isLoading } = useQuery({
-    queryKey: ["task", taskId],
-    enabled: !!taskId,
-    queryFn: async () => {
-      const response = await fetch(`http://localhost:3000/tasks/${taskId}`, {
-        method: "GET",
+  const { data: task, isLoading } = useGetTask({
+    taskId,
+    onSuccess: (data) => {
+      reset({
+        title: data.title,
+        time: data.time,
+        description: data.description,
       })
-
-      if (!response.ok) {
-        throw new Error("Erro ao buscar tarefa")
-      }
-
-      const data = await response.json()
-      reset(data) // preenche o form
-      return data // <- IMPORTANTÍSSIMO (senão task fica undefined)
     },
   })
 
   // Atualizar tarefa
-  const { mutate: updateTask, isPending: isUpdating } = useMutation({
-    mutationKey: ["updateTask", taskId],
-    mutationFn: async (formData) => {
-      const response = await fetch(`http://localhost:3000/tasks/${taskId}`, {
-        method: "PATCH",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      })
-
-      if (!response.ok) {
-        throw new Error("Erro ao atualizar tarefa")
-      }
-
-      const updated = await response.json()
-      return updated
-    },
-    onSuccess: (updated) => {
-      // Atualiza detalhe
-      queryClient.setQueryData(["task", taskId], updated)
-
-      // Atualiza lista (se existir cache)
-      queryClient.setQueryData(["tasks"], (oldTasks = []) =>
-        oldTasks.map((t) => (String(t.id) === String(taskId) ? updated : t))
-      )
-
-      toast.success("Tarefa atualizada com sucesso!")
-    },
-    onError: () => {
-      toast.error("Erro ao atualizar tarefa. Por favor, tente novamente.")
-    },
-  })
+  const { mutate: updateTask, isPending: isUpdating } = useUpdatedTasks(taskId)
 
   // Deletar tarefa
-  const { mutate: deleteTask, isPending: isDeleting } = useMutation({
-    mutationKey: ["deleteTask", taskId],
-    mutationFn: async () => {
-      const response = await fetch(`http://localhost:3000/tasks/${taskId}`, {
-        method: "DELETE",
-      })
-
-      if (!response.ok) {
-        throw new Error("Erro ao deletar tarefa")
-      }
-
-      // Não faz response.json() aqui (muitos backends retornam 204 sem body)
-      return true
-    },
-    onSuccess: () => {
-      // Remove do cache da lista
-      queryClient.setQueryData(["tasks"], (oldTasks = []) =>
-        oldTasks.filter((t) => String(t.id) !== String(taskId))
-      )
-
-      // Remove cache do detalhe
-      queryClient.removeQueries({ queryKey: ["task", taskId] })
-
-      toast.success("Tarefa deletada com sucesso!")
-      navigate(-1)
-    },
-    onError: () => {
-      toast.error("Erro ao deletar tarefa. Por favor, tente novamente.")
-    },
-  })
+  const { mutate: deleteTask, isPending: isDeleting } = useDeletedTask(taskId)
 
   const handleBackClick = () => navigate(-1)
 
@@ -153,6 +87,7 @@ const TaskDetailsPage = () => {
             color="danger"
             onClick={handleDeleteClick}
             disabled={isDeleting || !taskId}
+            type="button"
           >
             <TrashIcon />
             {isDeleting ? "Deletando..." : "Deletar Tarefa"}
