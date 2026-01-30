@@ -5,7 +5,7 @@ const HomePage = () => {
   return (
     <div className="flex">
       <Sidebar />
-      <Tasks />
+      <h1>Home Page</h1>
     </div>
   )
 }
