@@ -21,7 +21,7 @@ export const useDeletedTask = (taskId) => {
       )
 
       // Remove cache do detalhe
-      queryClient.removeQueries({ queryKey: ["task", taskId] })
+      queryClient.removeQueries({ queryKey: [TaskQueryKeys.getAll(), taskId] })
 
       toast.success("Tarefa deletada com sucesso!")
     },

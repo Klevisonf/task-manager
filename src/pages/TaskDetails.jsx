@@ -45,8 +45,8 @@ const TaskDetailsPage = () => {
     updateTask(data)
   }
 
-  const handleDeleteClick = () => {
-    deleteTask()
+  const handleDeleteClick = (data) => {
+    deleteTask(data)
   }
 
   return (

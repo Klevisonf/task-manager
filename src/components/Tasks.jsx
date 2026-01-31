@@ -1,5 +1,4 @@
 import { useQueryClient } from "@tanstack/react-query"
-import { useState } from "react"
 import { toast } from "sonner"
 
 import {
@@ -10,79 +9,29 @@ import {
   TrashIcon,
 } from "../assets/icons"
 import { useGetTaks } from "../hooks/data/use-get-tasks"
-import AddTaskDialog from "./AddTaskDialog"
+import { TaskQueryKeys } from "../keys/queries"
 import Button from "./Button"
+import Header from "./Header"
 import TaskItem from "./TaskItem"
 import TaskSeparator from "./TaskSeparator"
+
 const Tasks = () => {
   const queryClient = useQueryClient()
   const { data: tasks } = useGetTaks()
-
-  const [addTaskDialogOpen, setAddTaskDialogOpen] = useState(false)
   const morningTasks = tasks?.filter((task) => task.time === "morning")
   const afternoonTasks = tasks?.filter((task) => task.time === "afternoon")
   const eveningTasks = tasks?.filter((task) => task.time === "evening")
 
   const onDeleteTaskSuccess = async (taskId) => {
-    queryClient.setQueryData("tasks", (currentTasks) => {
+    queryClient.setQueryData(TaskQueryKeys.getAll(), (currentTasks) => {
       return currentTasks?.filter((task) => task.id !== taskId)
     })
     toast.success("Tarefa deletada com sucesso!")
   }
 
-  const handleDialogClose = () => {
-    setAddTaskDialogOpen(false)
-  }
-
-  const handleTaskCheckboxClick = (taskId) => {
-    const newTasks = tasks?.map((task) => {
-      if (task.id !== taskId) {
-        return task
-      }
-      if (task.status === "not_started") {
-        toast.success("Tarefa iniciada!")
-        return { ...task, status: "in_progress" }
-      }
-      if (task.status === "in_progress") {
-        toast.success("Tarefa concluida!")
-        return { ...task, status: "done" }
-      }
-      if (task.status === "done") {
-        toast.success("Tarefa reiniciada!")
-        return { ...task, status: "not_started" }
-      }
-      return task
-    })
-    queryClient.setQueryData("tasks", newTasks)
-  }
-
   return (
     <div className="w-full space-y-6 px-8 py-16">
-      <div className="flex w-full justify-between">
-        <div>
-          <span className="text-primary text-xs font-semibold">
-            Minhas Tarefas
-          </span>
-          <h2 className="text-xl font-semibold">Minhas Tarefas</h2>
-        </div>
-        <div className="flex items-center gap-3">
-          <Button color="ghost">
-            Limpar Tarefas
-            <TrashIcon />
-          </Button>
-
-          <Button onClick={() => setAddTaskDialogOpen(true)}>
-            NovaTarefas
-            <AddIcon />
-          </Button>
-
-          <AddTaskDialog
-            isOpen={addTaskDialogOpen}
-            handleClose={handleDialogClose}
-          />
-        </div>
-      </div>
-
+      <Header subtitle="Minhas Tarefas" title="Tarefas do dia" />
       <div className="rounded-lg bg-white p-6">
         <div className="space-y-3">
           <TaskSeparator title="Manha" icon={<SunIcon />} />
@@ -93,7 +42,6 @@ const Tasks = () => {
             <TaskItem
               key={task.id}
               task={task}
-              handleCheckboxClick={handleTaskCheckboxClick}
               onDeleteSuccess={onDeleteTaskSuccess}
             />
           ))}
@@ -108,7 +56,6 @@ const Tasks = () => {
             <TaskItem
               key={task.id}
               task={task}
-              handleCheckboxClick={handleTaskCheckboxClick}
               onDeleteSuccess={onDeleteTaskSuccess}
             />
           ))}
@@ -123,7 +70,6 @@ const Tasks = () => {
             <TaskItem
               key={task.id}
               task={task}
-              handleCheckboxClick={handleTaskCheckboxClick}
               onDeleteSuccess={onDeleteTaskSuccess}
             />
           ))}

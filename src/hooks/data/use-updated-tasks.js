@@ -1,5 +1,4 @@
 import { Mutation, useMutation, useQueryClient } from "@tanstack/react-query"
-import { Navigate } from "react-router-dom"
 import { toast } from "sonner"
 
 import { TaskMutationKeys } from "../../keys/mutation"
@@ -10,23 +9,22 @@ export const useUpdatedTasks = (taskId) => {
   const queryClient = useQueryClient()
   return useMutation({
     mutationKey: TaskMutationKeys.update(taskId),
-    mutationFn: async (formData) => {
-      const { data: updated } = await api.patch(`/tasks/${taskId}`, formData)
-      return updated
-    },
-    onSuccess: (updated) => {
-      // Atualiza detalhe
-      queryClient.setQueryData([TaskQueryKeys.getAll(), taskId], updated)
-
-      // Atualiza lista (se existir cache)
-      queryClient.setQueryData([TaskQueryKeys.getAll()], (oldTasks = []) =>
-        oldTasks.map((t) => (String(t.id) === String(taskId) ? updated : t))
-      )
-
-      toast.success("Tarefa atualizada com sucesso!")
-    },
-    onError: () => {
-      toast.error("Erro ao atualizar tarefa. Por favor, tente novamente.")
+    mutationFn: async (data) => {
+      const { data: updatedTasks } = await api.patch(`/tasks/${taskId}`, {
+        title: data.title,
+        description: data.description,
+        time: data.time,
+        status: data.status,
+      })
+      queryClient.setQueryData(TaskQueryKeys.getAll(), (oldTasks = []) => {
+        return oldTasks.map((task) => {
+          if (task.id === taskId) {
+            return updatedTasks
+          }
+          return task
+        })
+      })
+      queryClient.setQueryData(TaskQueryKeys.getOne(taskId), updatedTasks)
     },
   })
 }

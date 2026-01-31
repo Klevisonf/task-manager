@@ -4,15 +4,17 @@ import { toast } from "sonner"
 
 import { CheckIcon, DetailsIcon, Loadericon, TrashIcon } from "../assets/icons"
 import { useDeletedTask } from "../hooks/data/use-deleted-task"
+import { useUpdatedTasks } from "../hooks/data/use-updated-tasks"
+import { TaskQueryKeys } from "../keys/queries"
 import Button from "./Button"
-const TaskItem = ({ task, handleCheckboxClick }) => {
+const TaskItem = ({ task }) => {
   const queryClient = useQueryClient()
   const { mutate: deletedTasks, isPending } = useDeletedTask(task.id)
-
+  const { mutate: updatedTasks } = useUpdatedTasks(task.id)
   const handleDeleteClick = async () => {
     deletedTasks(undefined, {
       onSuccess: () => {
-        queryClient.setQueryData("tasks", (oldTasks) => {
+        queryClient.setQueryData(TaskQueryKeys.getAll(), (oldTasks) => {
           return oldTasks?.filter((t) => t.id !== task.id)
         })
         toast.success("Tarefa deletada com sucesso!")
@@ -33,7 +35,36 @@ const TaskItem = ({ task, handleCheckboxClick }) => {
       return "bg-dark-blue/20 text-text-dark-blue"
     }
   }
+  const getNewStatus = () => {
+    if (task.status === "not_started") {
+      return "in_progress"
+    }
+    if (task.status === "in_progress") {
+      return "done"
+    }
+    if (task.status === "done") {
+      return "not_started"
+    }
+    return "not_started"
+  }
 
+  const handleStatusChange = () => {
+    updatedTasks(
+      {
+        status: getNewStatus(),
+      },
+      {
+        onSuccess: () => {
+          toast.success("Status da tarefa atualizado com sucesso!")
+        },
+        onError: () => {
+          toast.error(
+            "Erro ao atualizar status da tarefa. Por favor, tente novamente."
+          )
+        },
+      }
+    )
+  }
   return (
     <div
       className={`flex items-center justify-between gap-2 rounded-lg px-4 py-3 text-sm ${getStatusClasses()}`}
@@ -45,7 +76,7 @@ const TaskItem = ({ task, handleCheckboxClick }) => {
           <input
             type="checkbox"
             checked={task.status === "done"}
-            onChange={() => handleCheckboxClick(task.id)}
+            onChange={handleStatusChange}
             className="absolute h-full w-full cursor-pointer opacity-0"
           />
 
