@@ -32,7 +32,7 @@ const TaskItem = ({ task }) => {
       return "bg-process/20 text-process"
     }
     if (task.status === "not_started") {
-      return "bg-dark-blue/20 text-text-dark-blue"
+      return "bg-dark-blue/20 bg-opacity-10 text-text-dark-blue"
     }
   }
   const getNewStatus = () => {

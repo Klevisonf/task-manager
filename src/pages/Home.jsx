@@ -1,46 +1,36 @@
-import { GlassWater, ListCheck, LoadIcon, Tasks2 } from "../assets/icons"
-import DashboardCard from "../components/DashboardCard"
+import DashboardCards from "../components/DashboardCards"
 import Header from "../components/Header"
 import Sidebar from "../components/Sidebar"
+import TaskItem from "../components/TaskItem"
 import { useGetTaks } from "../hooks/data/use-get-tasks"
 
 const HomePage = () => {
-  const { data: Tasks } = useGetTaks()
-
-  const inProgressTasks = Tasks?.filter(
-    (task) => task.status === "in_progress"
-  ).length
-  const completedTasks = Tasks?.filter((task) => task.status === "done").length
-
+  const { data: tasks } = useGetTaks()
   return (
     <div className="flex">
       <Sidebar />
       <div className="w-full space-y-6 px-8 py-16">
         <Header subtitle="Dashboard" title="Dashboard" />
-        <div className="grid grid-cols-4 gap-9">
-          <DashboardCard
-            icon={<Tasks2 />}
-            mainText={Tasks?.length}
-            secondaryText="Tarefas em disponiveis"
-          />
+        <DashboardCards />
+        <div className="grid grid-cols-[2fr_1fr] gap-6">
+          <div className="rounded-[10px] bg-white p-6">
+            <h3 className="mb-4 text-lg font-semibold">Tarefas</h3>
+            <span className="text-dark-gray text-sm">
+              Resumos das Tarefas Disponiveis
+            </span>
 
-          <DashboardCard
-            icon={<ListCheck />}
-            mainText={completedTasks}
-            secondaryText="Tarefas concluidas"
-          />
-
-          <DashboardCard
-            icon={<LoadIcon />}
-            mainText={inProgressTasks}
-            secondaryText="Tarefas em andamento"
-          />
-
-          <DashboardCard
-            icon={<GlassWater />}
-            mainText={5}
-            secondaryText="Água"
-          />
+            <div className="space-y-6">
+              {tasks?.map((task) => (
+                <TaskItem key={task.id} task={task} />
+              ))}
+            </div>
+          </div>
+          <div className="flex items-center justify-center rounded-[10px] bg-white p-6">
+            <p>
+              Cada pequena ação de hoje te aproxima das grandes conquistas de
+              amanhã. Faça o que precisa ser feito!
+            </p>
+          </div>
         </div>
       </div>
     </div>
