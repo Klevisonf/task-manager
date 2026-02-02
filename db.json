@@ -1,25 +1,11 @@
 {
   "tasks": [
     {
-      "id": "d0399982-6682-4f64-93f1-f900cb00e1cb",
-      "title": "test23",
-      "time": "evening",
-      "description": "test23",
-      "status": "not_started"
-    },
-    {
-      "id": "fb15cdfb-c9c9-4f3d-a460-b9105220d704",
-      "title": "test 1",
-      "time": "afternoon",
-      "description": "test2",
-      "status": "not_started"
-    },
-    {
-      "id": "a5cf09a3-a61b-4518-be17-031ca5b794ed",
-      "title": "test1",
-      "time": "afternoon",
-      "description": "test12",
-      "status": "not_started"
+      "id": "e80ea30e-8cac-4756-b014-2e76087f67c0",
+      "title": "test 4",
+      "time": "morning",
+      "description": "test 4",
+      "status": "done"
     }
   ]
 }
