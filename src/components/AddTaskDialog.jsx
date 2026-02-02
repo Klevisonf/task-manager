@@ -9,10 +9,11 @@ import { toast } from "sonner"
 import { v4 } from "uuid"
 
 import { Loadericon } from "../assets/icons"
+import { useAddTask } from "../hooks/data/use-add-task"
+import { TaskQueryKeys } from "../keys/queries"
 import Button from "./Button"
 import Input from "./Input"
 import TimeSelect from "./TimeSelect"
-import { useAddTask } from "../hooks/data/use-add-task"
 
 const AddTaskDialog = ({ isOpen, handleClose }) => {
   const {
@@ -29,7 +30,7 @@ const AddTaskDialog = ({ isOpen, handleClose }) => {
   })
   const nodeRef = useRef()
   const queryClient = useQueryClient()
-  const { mutate } = useAddTask()
+  const { mutate: addtasks } = useAddTask()
 
   const onDialogClose = () => {
     handleClose()
@@ -44,9 +45,9 @@ const AddTaskDialog = ({ isOpen, handleClose }) => {
       status: "not_started",
     }
 
-    mutate(task, {
+    addtasks(task, {
       onSuccess: () => {
-        queryClient.setQueryData("tasks", (oldTasks) => {
+        queryClient.setQueryData(TaskQueryKeys.getAll(), (oldTasks) => {
           return [...oldTasks, task]
         })
         handleClose()

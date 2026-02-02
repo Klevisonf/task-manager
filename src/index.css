@@ -1,169 +1,149 @@
 @import "tailwindcss";
 
-/* Tailwind v4: tokens no @theme (fora do @layer) */
-@theme {
-  --font-display: "Satoshi", sans-serif;
-  --breakpoint-3xl: 120rem;
-
-  --color-dark-blue: #35383e;
-  --color-primary: #00adb5;
-  --color-dark-gray: #818181;
-  --color-text-gray: #9a9c9f;
-  --color-light-gray: #eeeeee;
-  --color-white: #ffffff;
-  --color-background: #f8f8f8;
-  --color-process: #ffaa84;
-  --color-danger: #ef4444;
-  --color-text-unColor: #e6f7f8;
-}
 
 @layer base {
   @font-face {
     font-family: "Poppins";
-    src: url("/fonts/Poppins-Black.ttf") format("truetype");
+    src: url("./assets/fontes/Poppins-Black.ttf") format("truetype");
     font-weight: 900;
     font-style: normal;
-    font-display: swap;
   }
 
   @font-face {
     font-family: "Poppins";
-    src: url("/fonts/Poppins-BlackItalic.ttf") format("truetype");
+    src: url("./assets/fonts/Poppins-BlackItalic.ttf") format("truetype");
     font-weight: 900;
     font-style: italic;
-    font-display: swap;
   }
 
   @font-face {
     font-family: "Poppins";
-    src: url("/fonts/Poppins-Bold.ttf") format("truetype");
+    src: url("./assets/fonts/Poppins-Bold.ttf") format("truetype");
     font-weight: 700;
     font-style: normal;
-    font-display: swap;
   }
 
   @font-face {
     font-family: "Poppins";
-    src: url("/fonts/Poppins-BoldItalic.ttf") format("truetype");
+    src: url("./assets/fonts/Poppins-BoldItalic.ttf") format("truetype");
     font-weight: 700;
     font-style: italic;
-    font-display: swap;
   }
 
   @font-face {
     font-family: "Poppins";
-    src: url("/fonts/Poppins-ExtraBold.ttf") format("truetype");
+    src: url("./assets/fonts/Poppins-ExtraBold.ttf") format("truetype");
     font-weight: 800;
     font-style: normal;
-    font-display: swap;
   }
 
   @font-face {
     font-family: "Poppins";
-    src: url("/fonts/Poppins-ExtraBoldItalic.ttf") format("truetype");
+    src: url("./assets/fonts/Poppins-ExtraBoldItalic.ttf") format("truetype");
     font-weight: 800;
     font-style: italic;
-    font-display: swap;
   }
 
   @font-face {
     font-family: "Poppins";
-    src: url("/fonts/Poppins-ExtraLight.ttf") format("truetype");
+    src: url("./assets/fonts/Poppins-ExtraLight.ttf") format("truetype");
     font-weight: 200;
     font-style: normal;
-    font-display: swap;
   }
 
   @font-face {
     font-family: "Poppins";
-    src: url("/fonts/Poppins-ExtraLightItalic.ttf") format("truetype");
+    src: url("./assets/fonts/Poppins-ExtraLightItalic.ttf")
+      format("truetype");
     font-weight: 200;
     font-style: italic;
-    font-display: swap;
   }
 
   @font-face {
     font-family: "Poppins";
-    src: url("/fonts/Poppins-Italic.ttf") format("truetype");
+    src: url("./assets/fonts/Poppins-Italic.ttf") format("truetype");
     font-weight: 400;
     font-style: italic;
-    font-display: swap;
   }
 
   @font-face {
     font-family: "Poppins";
-    src: url("/fonts/Poppins-Light.ttf") format("truetype");
+    src: url("./assets/fonts/Poppins-Light.ttf") format("truetype");
     font-weight: 300;
     font-style: normal;
-    font-display: swap;
   }
 
   @font-face {
     font-family: "Poppins";
-    src: url("/fonts/Poppins-LightItalic.ttf") format("truetype");
+    src: url("./assets/fonts/Poppins-LightItalic.ttf") format("truetype");
     font-weight: 300;
     font-style: italic;
-    font-display: swap;
   }
 
   @font-face {
     font-family: "Poppins";
-    src: url("/fonts/Poppins-Medium.ttf") format("truetype");
+    src: url("./assets/fonts/Poppins-Medium.ttf") format("truetype");
     font-weight: 500;
     font-style: normal;
-    font-display: swap;
   }
 
   @font-face {
     font-family: "Poppins";
-    src: url("/fonts/Poppins-MediumItalic.ttf") format("truetype");
+    src: url("./assets/fonts/Poppins-MediumItalic.ttf") format("truetype");
     font-weight: 500;
     font-style: italic;
-    font-display: swap;
   }
 
   @font-face {
     font-family: "Poppins";
-    src: url("/fonts/Poppins-Regular.ttf") format("truetype");
+    src: url("./assets/fonts/Poppins-Regular.ttf") format("truetype");
     font-weight: 400;
     font-style: normal;
-    font-display: swap;
   }
 
   @font-face {
     font-family: "Poppins";
-    src: url("/fonts/Poppins-SemiBold.ttf") format("truetype");
+    src: url("./assets/fonts/Poppins-SemiBold.ttf") format("truetype");
     font-weight: 600;
     font-style: normal;
-    font-display: swap;
   }
 
   @font-face {
     font-family: "Poppins";
-    src: url("/fonts/Poppins-SemiBoldItalic.ttf") format("truetype");
+    src: url("./assets/fonts/Poppins-SemiBoldItalic.ttf") format("truetype");
     font-weight: 600;
     font-style: italic;
-    font-display: swap;
   }
 
   @font-face {
     font-family: "Poppins";
-    src: url("/fonts/Poppins-Thin.ttf") format("truetype");
+    src: url("./assets/fonts/Poppins-Thin.ttf") format("truetype");
     font-weight: 100;
     font-style: normal;
-    font-display: swap;
   }
 
   @font-face {
     font-family: "Poppins";
-    src: url("/fonts/Poppins-ThinItalic.ttf") format("truetype");
+    src: url("./assets/fonts/Poppins-ThinItalic.ttf") format("truetype");
     font-weight: 100;
     font-style: italic;
-    font-display: swap;
   }
-
-  body {
-    @apply bg-[#f8f8f8];
-    font-family: "Poppins", sans-serif;
+  body{
+    @apply bg-[#f8f8f8]
   }
+  @theme {
+  --font-display: "Satoshi", "sans-serif";
+  --breakpoint-3xl: 120rem;
+    --color-dark-blue: #35383E;
+  --color-primary: #00ADB5;
+  --color-dark-gray: #818181;
+  --color-text-gray: #9A9C9F;
+  --color-light-gray: #EEEEEE;
+  --color-white: #FFFFFF;
+  --color-background: #F8F8F8;
+  --color-process: #FFAA84;
+  --color-danger: #EF4444;
+  --color-text-unColor: #E6F7F8
+  /* ... */
+}
 }
